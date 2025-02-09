@@ -2,31 +2,21 @@
 
 import React, { createContext, useEffect, useState } from 'react';
 
-interface Item {
-    id: number;
-    description: string;
-    quantity?: number;
-    category?: string;
-    unit?: string;
-    priority?: string;
-    store?: string;
-    estimatedPrice?: number;
-    notes?: string;
-    packed: boolean;
-}
+import { ShoppingItem } from '@/types/types';
 
 interface SharedStateContextProps {
-    items: Item[];
-    addItem: (item: Item) => void;
+    items: ShoppingItem[];
+    addItem: (item: ShoppingItem) => void;
     deleteItem: (id: number) => void;
     toggleItem: (id: number) => void;
     clearItems: () => void;
 }
 
+
 export const SharedStateContext = createContext<SharedStateContextProps | null>(null);
 
 export function SharedStateProvider({ children }: { children: React.ReactNode }) {
-    const [items, setItems] = useState<Item[]>([]);
+    const [items, setItems] = useState<ShoppingItem[]>([]);
 
     // Load items from localStorage when the component mounts
     useEffect(() => {
@@ -41,7 +31,7 @@ export function SharedStateProvider({ children }: { children: React.ReactNode })
         localStorage.setItem('packingList:items', JSON.stringify(items));
     }, [items]);
 
-    function handleAddItems(item: Item): void {
+    function handleAddItems(item: ShoppingItem): void {
         setItems((prevItems) => [...prevItems, item]);
     }
 

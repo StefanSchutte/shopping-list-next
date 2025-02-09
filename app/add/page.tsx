@@ -3,25 +3,13 @@
 import { useRouter } from 'next/navigation';
 import { useSharedState } from '@/contexts/SharedStateContext';
 import Form from '@/components/Form';
-
-interface AddItemType {
-    id: number;
-    description: string;
-    quantity?: number;
-    category?: string;
-    unit?: string;
-    priority?: string;
-    store?: string;
-    estimatedPrice?: number;
-    notes?: string;
-    packed: boolean;
-}
+import { ShoppingItem } from '@/types/types';
 
 export default function AddItem() {
     const { addItem } = useSharedState();
     const router = useRouter();
 
-    function handleAddItemAndNavigate(item: AddItemType) {
+    function handleAddItemAndNavigate(item: ShoppingItem) {
         addItem(item);
         router.push('/');
     }

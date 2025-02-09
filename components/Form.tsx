@@ -1,20 +1,10 @@
 'use client';
 
 import React, { useState } from "react";
+import { ShoppingItem } from "@/types/types";
 
 interface FormProps {
-    onAddItems: (item: {
-        id: number;
-        description: string;
-        quantity?: number;
-        category?: string;
-        unit?: string;
-        priority?: string;
-        store?: string;
-        estimatedPrice?: number;
-        notes?: string;
-        packed: boolean;
-    }) => void;
+    onAddItems: (item: ShoppingItem) => void;
 }
 
 export default function Form({ onAddItems }: FormProps) {
@@ -31,17 +21,17 @@ export default function Form({ onAddItems }: FormProps) {
         e.preventDefault();
         if (!description || !category) return;
 
-        const newItem = {
+        const newItem: ShoppingItem = {
+            id: Date.now(),
             description,
-            quantity: quantity || undefined,
-            category: category || undefined,
+            quantity,
+            category: category || "Other", // Provide default category
             unit: unit || undefined,
             priority: priority || undefined,
             store: store || undefined,
             estimatedPrice: estimatedPrice ? Number(estimatedPrice) : undefined,
             notes: notes || undefined,
             packed: false,
-            id: Date.now(),
         };
 
         onAddItems(newItem);

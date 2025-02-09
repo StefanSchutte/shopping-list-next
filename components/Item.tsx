@@ -1,20 +1,10 @@
 'use client';
 
 import React, { useState } from 'react';
+import { ShoppingItem } from '@/types/types';
 
 interface ItemProps {
-    item: {
-        id: number;
-        description: string;
-        quantity?: number;
-        category?: string;
-        unit?: string;
-        priority?: string;
-        store?: string;
-        estimatedPrice?: number;
-        notes?: string;
-        packed: boolean;
-    };
+    item: ShoppingItem;
     onDeleteItem: (id: number) => void;
     onToggleItem: (id: number) => void;
 }
