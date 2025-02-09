@@ -6,8 +6,8 @@ interface ItemProps {
     item: {
         id: number;
         description: string;
-        quantity: number;
-        category: string;
+        quantity?: number;
+        category?: string;
         unit?: string;
         priority?: string;
         store?: string;

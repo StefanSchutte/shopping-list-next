@@ -1,4 +1,3 @@
-// contexts/SharedStateContext.tsx
 'use client';
 
 import React, { createContext, useEffect, useState } from 'react';
@@ -6,7 +5,13 @@ import React, { createContext, useEffect, useState } from 'react';
 interface Item {
     id: number;
     description: string;
-    quantity: number;
+    quantity?: number;
+    category?: string;
+    unit?: string;
+    priority?: string;
+    store?: string;
+    estimatedPrice?: number;
+    notes?: string;
     packed: boolean;
 }
 
