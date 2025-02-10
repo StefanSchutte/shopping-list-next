@@ -8,7 +8,6 @@ export const SharedStateContext = createContext<SharedStateContextProps | null>(
 export function SharedStateProvider({ children }: { children: React.ReactNode }) {
     const [items, setItems] = useState<ShoppingItem[]>([]);
 
-    // Load items from localStorage when the component mounts
     useEffect(() => {
         const storedItems = localStorage.getItem('packingList:items');
         if (storedItems) {
@@ -16,20 +15,19 @@ export function SharedStateProvider({ children }: { children: React.ReactNode })
         }
     }, []);
 
-    // Save items to localStorage whenever they change
     useEffect(() => {
         localStorage.setItem('packingList:items', JSON.stringify(items));
     }, [items]);
 
-    function handleAddItems(item: ShoppingItem): void {
+    function handleAddItems(item: ShoppingItem) {
         setItems((prevItems) => [...prevItems, item]);
     }
 
-    function handleDeleteItem(id: number): void {
+    function handleDeleteItem(id: number) {
         setItems((prevItems) => prevItems.filter((item) => item.id !== id));
     }
 
-    function handleToggleItem(id: number): void {
+    function handleToggleItem(id: number) {
         setItems((prevItems) =>
             prevItems.map((item) =>
                 item.id === id ? { ...item, packed: !item.packed } : item
@@ -37,7 +35,7 @@ export function SharedStateProvider({ children }: { children: React.ReactNode })
         );
     }
 
-    function handleClearList(): void {
+    function handleClearList() {
         setItems([]);
     }
 
