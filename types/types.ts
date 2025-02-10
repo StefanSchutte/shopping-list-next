@@ -41,6 +41,7 @@ export interface FilterOptionsProps {
     onSortChange: (value: string) => void;
     onClearList: () => void;
     isVisible: boolean;
+    items: ShoppingItem[];
 }
 
 export interface StatsProps {

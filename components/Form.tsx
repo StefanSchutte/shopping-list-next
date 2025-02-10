@@ -1,17 +1,15 @@
-'use client';
-
 import React, { useState } from "react";
 import type { ShoppingItem, FormProps } from "@/types/types";
 
 export default function Form({ onAddItems }: FormProps) {
-    const [description, setDescription] = useState<string>("");
-    const [quantity, setQuantity] = useState<number>(1);
-    const [category, setCategory] = useState<string>("");
-    const [unit, setUnit] = useState<string>("");
-    const [priority, setPriority] = useState<string>("");
-    const [store, setStore] = useState<string>("");
-    const [estimatedPrice, setEstimatedPrice] = useState<string>("");
-    const [notes, setNotes] = useState<string>("");
+    const [description, setDescription] = useState("");
+    const [quantity, setQuantity] = useState(1);
+    const [category, setCategory] = useState("");
+    const [unit, setUnit] = useState("");
+    const [priority, setPriority] = useState("");
+    const [store, setStore] = useState("");
+    const [estimatedPrice, setEstimatedPrice] = useState("");
+    const [notes, setNotes] = useState("");
 
     function handleSubmit(e: React.FormEvent): void {
         e.preventDefault();
@@ -32,7 +30,6 @@ export default function Form({ onAddItems }: FormProps) {
 
         onAddItems(newItem);
 
-        // Reset form
         setDescription("");
         setQuantity(1);
         setCategory("");
@@ -44,18 +41,22 @@ export default function Form({ onAddItems }: FormProps) {
     }
 
     return (
-        <div className="bg-gray-600 rounded-lg shadow-md p-8">
-            <form onSubmit={handleSubmit} className="space-y-4">
-                {/* Required Fields */}
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <div>
-                        <label htmlFor="description" className="block text-sm font-bold mb-2 text-white">
-                            Item Name <span className="text-red-500">*</span>
+        <div className="bg-white dark:bg-gray-800 rounded-xl shadow-xl p-8 max-w-4xl mx-auto">
+            <h2 className="text-2xl font-semibold mb-6 text-gray-800 dark:text-white">Add New Item</h2>
+            <form onSubmit={handleSubmit} className="space-y-6">
+                {/* Required Fields Section */}
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div className="space-y-2">
+                        <label htmlFor="description" className="block text-sm font-medium text-gray-700 dark:text-gray-300">
+                            Item Name <span className="text-rose-500">*</span>
                         </label>
                         <input
                             type="text"
                             id="description"
-                            className="w-full p-2 border border-gray-300 rounded text-gray-950"
+                            className="w-full px-4 py-2.5 rounded-lg border border-gray-300 dark:border-gray-600
+                                     bg-white dark:bg-gray-700 text-gray-900 dark:text-white
+                                     focus:ring-2 focus:ring-blue-500 focus:border-transparent
+                                     transition-colors duration-200"
                             placeholder="Enter item name"
                             value={description}
                             onChange={(e) => setDescription(e.target.value)}
@@ -63,15 +64,19 @@ export default function Form({ onAddItems }: FormProps) {
                         />
                     </div>
 
-                    <div>
-                        <label htmlFor="category" className="block text-sm font-bold mb-2 text-white">
-                            Category
+                    <div className="space-y-2">
+                        <label htmlFor="category" className="block text-sm font-medium text-gray-700 dark:text-gray-300">
+                            Category <span className="text-rose-500">*</span>
                         </label>
                         <select
                             id="category"
-                            className="w-full p-2 border border-gray-300 rounded text-gray-950"
+                            className="w-full px-4 py-2.5 rounded-lg border border-gray-300 dark:border-gray-600
+                                     bg-white dark:bg-gray-700 text-gray-900 dark:text-white
+                                     focus:ring-2 focus:ring-blue-500 focus:border-transparent
+                                     transition-colors duration-200"
                             value={category}
                             onChange={(e) => setCategory(e.target.value)}
+                            required
                         >
                             <option value="">Select a category</option>
                             <option value="Produce">Produce</option>
@@ -86,15 +91,18 @@ export default function Form({ onAddItems }: FormProps) {
                     </div>
                 </div>
 
-                {/* Quantity and Unit */}
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <div>
-                        <label htmlFor="quantity" className="block text-sm font-bold mb-2 text-white">
+                {/* Quantity and Unit Section */}
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div className="space-y-2">
+                        <label htmlFor="quantity" className="block text-sm font-medium text-gray-700 dark:text-gray-300">
                             Quantity
                         </label>
                         <select
                             id="quantity"
-                            className="w-full p-2 border border-gray-300 rounded text-gray-950"
+                            className="w-full px-4 py-2.5 rounded-lg border border-gray-300 dark:border-gray-600
+                                     bg-white dark:bg-gray-700 text-gray-900 dark:text-white
+                                     focus:ring-2 focus:ring-blue-500 focus:border-transparent
+                                     transition-colors duration-200"
                             value={quantity}
                             onChange={(e) => setQuantity(Number(e.target.value))}
                         >
@@ -106,13 +114,16 @@ export default function Form({ onAddItems }: FormProps) {
                         </select>
                     </div>
 
-                    <div>
-                        <label htmlFor="unit" className="block text-sm font-bold mb-2 text-white">
+                    <div className="space-y-2">
+                        <label htmlFor="unit" className="block text-sm font-medium text-gray-700 dark:text-gray-300">
                             Unit
                         </label>
                         <select
                             id="unit"
-                            className="w-full p-2 border border-gray-300 rounded text-gray-950"
+                            className="w-full px-4 py-2.5 rounded-lg border border-gray-300 dark:border-gray-600
+                                     bg-white dark:bg-gray-700 text-gray-900 dark:text-white
+                                     focus:ring-2 focus:ring-blue-500 focus:border-transparent
+                                     transition-colors duration-200"
                             value={unit}
                             onChange={(e) => setUnit(e.target.value)}
                         >
@@ -127,15 +138,18 @@ export default function Form({ onAddItems }: FormProps) {
                     </div>
                 </div>
 
-                {/* Priority and Store */}
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <div>
-                        <label htmlFor="priority" className="block text-sm font-bold mb-2 text-white">
+                {/* Priority and Store Section */}
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div className="space-y-2">
+                        <label htmlFor="priority" className="block text-sm font-medium text-gray-700 dark:text-gray-300">
                             Priority
                         </label>
                         <select
                             id="priority"
-                            className="w-full p-2 border border-gray-300 rounded text-gray-950"
+                            className="w-full px-4 py-2.5 rounded-lg border border-gray-300 dark:border-gray-600
+                                     bg-white dark:bg-gray-700 text-gray-900 dark:text-white
+                                     focus:ring-2 focus:ring-blue-500 focus:border-transparent
+                                     transition-colors duration-200"
                             value={priority}
                             onChange={(e) => setPriority(e.target.value)}
                         >
@@ -146,14 +160,17 @@ export default function Form({ onAddItems }: FormProps) {
                         </select>
                     </div>
 
-                    <div>
-                        <label htmlFor="store" className="block text-sm font-bold mb-2 text-white">
+                    <div className="space-y-2">
+                        <label htmlFor="store" className="block text-sm font-medium text-gray-700 dark:text-gray-300">
                             Store
                         </label>
                         <input
                             type="text"
                             id="store"
-                            className="w-full p-2 border border-gray-300 rounded text-gray-950"
+                            className="w-full px-4 py-2.5 rounded-lg border border-gray-300 dark:border-gray-600
+                                     bg-white dark:bg-gray-700 text-gray-900 dark:text-white
+                                     focus:ring-2 focus:ring-blue-500 focus:border-transparent
+                                     transition-colors duration-200"
                             placeholder="Enter store name"
                             value={store}
                             onChange={(e) => setStore(e.target.value)}
@@ -161,32 +178,41 @@ export default function Form({ onAddItems }: FormProps) {
                     </div>
                 </div>
 
-                {/* Price and Notes */}
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <div>
-                        <label htmlFor="estimatedPrice" className="block text-sm font-bold mb-2 text-white">
+                {/* Price and Notes Section */}
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div className="space-y-2">
+                        <label htmlFor="estimatedPrice" className="block text-sm font-medium text-gray-700 dark:text-gray-300">
                             Estimated Price
                         </label>
-                        <input
-                            type="number"
-                            id="estimatedPrice"
-                            className="w-full p-2 border border-gray-300 rounded text-gray-950"
-                            placeholder="Enter estimated price"
-                            value={estimatedPrice}
-                            onChange={(e) => setEstimatedPrice(e.target.value)}
-                            step="0.01"
-                            min="0"
-                        />
+                        <div className="relative">
+                            <span className="absolute left-3 top-2.5 text-gray-500 dark:text-gray-400">$</span>
+                            <input
+                                type="number"
+                                id="estimatedPrice"
+                                className="w-full pl-8 pr-4 py-2.5 rounded-lg border border-gray-300 dark:border-gray-600
+                                         bg-white dark:bg-gray-700 text-gray-900 dark:text-white
+                                         focus:ring-2 focus:ring-blue-500 focus:border-transparent
+                                         transition-colors duration-200"
+                                placeholder="0.00"
+                                value={estimatedPrice}
+                                onChange={(e) => setEstimatedPrice(e.target.value)}
+                                step="0.01"
+                                min="0"
+                            />
+                        </div>
                     </div>
 
-                    <div>
-                        <label htmlFor="notes" className="block text-sm font-bold mb-2 text-white">
+                    <div className="space-y-2">
+                        <label htmlFor="notes" className="block text-sm font-medium text-gray-700 dark:text-gray-300">
                             Notes
                         </label>
                         <input
                             type="text"
                             id="notes"
-                            className="w-full p-2 border border-gray-300 rounded text-gray-950"
+                            className="w-full px-4 py-2.5 rounded-lg border border-gray-300 dark:border-gray-600
+                                     bg-white dark:bg-gray-700 text-gray-900 dark:text-white
+                                     focus:ring-2 focus:ring-blue-500 focus:border-transparent
+                                     transition-colors duration-200"
                             placeholder="Add any notes"
                             value={notes}
                             onChange={(e) => setNotes(e.target.value)}
@@ -194,13 +220,14 @@ export default function Form({ onAddItems }: FormProps) {
                     </div>
                 </div>
 
-                <div className="flex justify-center mt-6">
+                <div className="flex justify-end mt-8">
                     <button
                         type="submit"
-                        className="bg-blue-500 text-white px-6 py-2 rounded hover:bg-blue-600
-                                 transition-colors w-1/2"
+                        className="px-6 py-2.5 bg-blue-600 text-white font-medium rounded-lg
+                                 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2
+                                 transform transition-all duration-200 hover:scale-105"
                     >
-                        Add Item
+                        Add to List
                     </button>
                 </div>
             </form>
