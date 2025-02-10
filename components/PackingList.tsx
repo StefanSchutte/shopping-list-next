@@ -4,12 +4,7 @@ import React, { useState } from 'react';
 import Item from './Item';
 import FilterOptions from './FilterOptions';
 
-interface PackingListProps {
-    items: { id: number; description: string; quantity: number; packed: boolean }[];
-    onDeleteItem: (id: number) => void;
-    onToggleItem: (id: number) => void;
-    onClearList: () => void;
-}
+import { PackingListProps } from '@/types/types';
 
 export default function PackingList({
                                         items,

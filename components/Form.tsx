@@ -1,11 +1,7 @@
 'use client';
 
 import React, { useState } from "react";
-import { ShoppingItem } from "@/types/types";
-
-interface FormProps {
-    onAddItems: (item: ShoppingItem) => void;
-}
+import { ShoppingItem, FormProps } from "@/types/types";
 
 export default function Form({ onAddItems }: FormProps) {
     const [description, setDescription] = useState<string>("");

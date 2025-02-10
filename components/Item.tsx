@@ -1,13 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
-import { ShoppingItem } from '@/types/types';
-
-interface ItemProps {
-    item: ShoppingItem;
-    onDeleteItem: (id: number) => void;
-    onToggleItem: (id: number) => void;
-}
+import { ItemProps } from '@/types/types';
 
 export default function Item({ item, onDeleteItem, onToggleItem }: ItemProps) {
     const [showDetails, setShowDetails] = useState(false);

@@ -1,13 +1,7 @@
 'use client';
 
 import React from 'react';
-
-interface FilterOptionsProps {
-    sortBy: string;
-    onSortChange: (value: string) => void;
-    onClearList: () => void;
-    isVisible: boolean;
-}
+import { FilterOptionsProps } from '@/types/types';
 
 export default function FilterOptions({
                                           sortBy,

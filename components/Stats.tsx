@@ -1,10 +1,7 @@
 'use client';
 
 import React from 'react';
-
-interface StatsProps {
-    items: { id: number; description: string; quantity: number; packed: boolean }[];
-}
+import { StatsProps } from '@/types/types';
 
 export default function Stats({ items }: StatsProps) {
     if (!items.length) {

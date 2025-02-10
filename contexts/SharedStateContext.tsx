@@ -1,17 +1,7 @@
 'use client';
 
 import React, { createContext, useEffect, useState } from 'react';
-
-import { ShoppingItem } from '@/types/types';
-
-interface SharedStateContextProps {
-    items: ShoppingItem[];
-    addItem: (item: ShoppingItem) => void;
-    deleteItem: (id: number) => void;
-    toggleItem: (id: number) => void;
-    clearItems: () => void;
-}
-
+import { ShoppingItem, SharedStateContextProps } from '@/types/types';
 
 export const SharedStateContext = createContext<SharedStateContextProps | null>(null);
 
