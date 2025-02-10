@@ -19,25 +19,25 @@ export function SharedStateProvider({ children }: { children: React.ReactNode })
         localStorage.setItem('packingList:items', JSON.stringify(items));
     }, [items]);
 
-    function handleAddItems(item: ShoppingItem) {
+    const handleAddItems = (item: ShoppingItem): void => {
         setItems((prevItems) => [...prevItems, item]);
-    }
+    };
 
-    function handleDeleteItem(id: number) {
+    const handleDeleteItem = (id: number): void => {
         setItems((prevItems) => prevItems.filter((item) => item.id !== id));
-    }
+    };
 
-    function handleToggleItem(id: number) {
+    const handleToggleItem = (id: number): void => {
         setItems((prevItems) =>
             prevItems.map((item) =>
                 item.id === id ? { ...item, packed: !item.packed } : item
             )
         );
-    }
+    };
 
-    function handleClearList() {
+    const handleClearList = (): void => {
         setItems([]);
-    }
+    };
 
     const sharedStateValue: SharedStateContextProps = {
         items,
@@ -54,7 +54,7 @@ export function SharedStateProvider({ children }: { children: React.ReactNode })
     );
 }
 
-export function useSharedState() {
+export function useSharedState(): SharedStateContextProps {
     const context = React.useContext(SharedStateContext);
     if (!context) {
         throw new Error("useSharedState must be used within a SharedStateProvider");

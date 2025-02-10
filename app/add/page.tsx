@@ -9,10 +9,11 @@ export default function AddItem() {
     const { addItem } = useSharedState();
     const router = useRouter();
 
-    function handleAddItemAndNavigate(item: ShoppingItem) {
+    // Explicitly type the function to match ShoppingItem interface
+    const handleAddItemAndNavigate = (item: ShoppingItem): void => {
         addItem(item);
         router.push('/');
-    }
+    };
 
     return (
         <div className="max-w-2xl mx-auto">

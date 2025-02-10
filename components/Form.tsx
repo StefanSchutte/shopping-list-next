@@ -21,7 +21,7 @@ export default function Form({ onAddItems }: FormProps) {
             id: Date.now(),
             description,
             quantity,
-            category: category || "Other", // Provide default category
+            category, // Provide default category
             unit: unit || undefined,
             priority: priority || undefined,
             store: store || undefined,
