@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState } from "react";
-import { ShoppingItem, FormProps } from "@/types/types";
+import type { ShoppingItem, FormProps } from "@/types/types";
 
 export default function Form({ onAddItems }: FormProps) {
     const [description, setDescription] = useState<string>("");
@@ -21,7 +21,7 @@ export default function Form({ onAddItems }: FormProps) {
             id: Date.now(),
             description,
             quantity,
-            category, // Provide default category
+            category,
             unit: unit || undefined,
             priority: priority || undefined,
             store: store || undefined,

@@ -1,9 +1,9 @@
 'use client';
 
-import React, { createContext, useEffect, useState } from 'react';
-import { ShoppingItem, SharedStateContextProps } from '@/types/types';
+import React, { createContext, useContext, useEffect, useState } from 'react';
+import type { ShoppingItem, SharedStateContextProps } from '@/types/types';
 
-export const SharedStateContext = createContext<SharedStateContextProps | null>(null);
+const SharedStateContext = createContext<SharedStateContextProps | null>(null);
 
 export function SharedStateProvider({ children }: { children: React.ReactNode }) {
     const [items, setItems] = useState<ShoppingItem[]>([]);
@@ -19,17 +19,17 @@ export function SharedStateProvider({ children }: { children: React.ReactNode })
         localStorage.setItem('packingList:items', JSON.stringify(items));
     }, [items]);
 
-    const handleAddItems = (item: ShoppingItem): void => {
-        setItems((prevItems) => [...prevItems, item]);
+    const handleAddItem = (item: ShoppingItem): void => {
+        setItems(prev => [...prev, item]);
     };
 
     const handleDeleteItem = (id: number): void => {
-        setItems((prevItems) => prevItems.filter((item) => item.id !== id));
+        setItems(prev => prev.filter(item => item.id !== id));
     };
 
     const handleToggleItem = (id: number): void => {
-        setItems((prevItems) =>
-            prevItems.map((item) =>
+        setItems(prev =>
+            prev.map(item =>
                 item.id === id ? { ...item, packed: !item.packed } : item
             )
         );
@@ -39,25 +39,25 @@ export function SharedStateProvider({ children }: { children: React.ReactNode })
         setItems([]);
     };
 
-    const sharedStateValue: SharedStateContextProps = {
+    const value: SharedStateContextProps = {
         items,
-        addItem: handleAddItems,
+        addItem: handleAddItem,
         deleteItem: handleDeleteItem,
         toggleItem: handleToggleItem,
         clearItems: handleClearList,
     };
 
     return (
-        <SharedStateContext.Provider value={sharedStateValue}>
+        <SharedStateContext.Provider value={value}>
             {children}
         </SharedStateContext.Provider>
     );
 }
 
 export function useSharedState(): SharedStateContextProps {
-    const context = React.useContext(SharedStateContext);
+    const context = useContext(SharedStateContext);
     if (!context) {
-        throw new Error("useSharedState must be used within a SharedStateProvider");
+        throw new Error('useSharedState must be used within a SharedStateProvider');
     }
     return context;
 }

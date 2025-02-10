@@ -3,14 +3,14 @@
 import { useRouter } from 'next/navigation';
 import { useSharedState } from '@/contexts/SharedStateContext';
 import Form from '@/components/Form';
-import { ShoppingItem } from '@/types/types';
+import type { ShoppingItem } from '@/types/types';
 
 export default function AddItem() {
     const { addItem } = useSharedState();
     const router = useRouter();
 
     // Explicitly type the function to match ShoppingItem interface
-    const handleAddItemAndNavigate = (item: ShoppingItem): void => {
+    const handleAddItemAndNavigate = (item: ShoppingItem) => {
         addItem(item);
         router.push('/');
     };
