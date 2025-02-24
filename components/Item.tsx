@@ -9,6 +9,8 @@ export default function Item({ item, onDeleteItem, onToggleItem }: ItemProps) {
         ? `$${item.estimatedPrice.toFixed(2)}`
         : undefined;
 
+    const hasAdditionalInfo = !!(item.store || formattedPrice || item.notes);
+
     const getPriorityColor = (priority: string | undefined) => {
         switch (priority) {
             case 'High':
@@ -78,19 +80,22 @@ export default function Item({ item, onDeleteItem, onToggleItem }: ItemProps) {
 
                             {/* Action buttons */}
                             <div className="flex items-center gap-2 flex-shrink-0">
-                                <button
-                                    onClick={() => setShowDetails(!showDetails)}
-                                    className="p-1.5 text-gray-500 hover:text-gray-700 dark:text-gray-400
-                                             dark:hover:text-gray-200 rounded-lg hover:bg-gray-100
-                                             dark:hover:bg-gray-600 transition-colors duration-200"
-                                    aria-label="Toggle details"
-                                >
-                                    {showDetails ? (
-                                        <ChevronUp className="w-5 h-5" />
-                                    ) : (
-                                        <ChevronDown className="w-5 h-5" />
-                                    )}
-                                </button>
+                                {hasAdditionalInfo && (
+                                    <button
+                                        onClick={() => setShowDetails(!showDetails)}
+                                        className="p-1.5 text-gray-500 hover:text-gray-700 dark:text-gray-400
+                                                 dark:hover:text-gray-200 rounded-lg hover:bg-gray-100
+                                                 dark:hover:bg-gray-600 transition-colors duration-200"
+                                        aria-label="Toggle details"
+                                    >
+                                        {showDetails ? (
+                                            <ChevronUp className="w-5 h-5" />
+                                        ) : (
+                                            <ChevronDown className="w-5 h-5" />
+                                        )}
+                                    </button>
+                                )}
+
                                 <button
                                     onClick={() => onDeleteItem(item.id)}
                                     className="p-1.5 text-red-500 hover:text-red-700 dark:text-red-400
@@ -107,7 +112,7 @@ export default function Item({ item, onDeleteItem, onToggleItem }: ItemProps) {
             </div>
 
             {/* Expandable details section */}
-            {showDetails && (
+            {showDetails && hasAdditionalInfo &&(
                 <div className="px-4 pb-4 border-t border-gray-100 dark:border-gray-600">
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mt-3">
                         {item.store && (

@@ -1,67 +1,3 @@
-/*
-'use client';
-
-import React, { createContext, useContext, useEffect, useState } from 'react';
-import type { ShoppingItem, SharedStateContextProps } from '@/types/types';
-
-const SharedStateContext = createContext<SharedStateContextProps | null>(null);
-
-export function SharedStateProvider({ children }: { children: React.ReactNode }) {
-    const [items, setItems] = useState<ShoppingItem[]>([]);
-
-    useEffect(() => {
-        const storedItems = localStorage.getItem('packingList:items');
-        if (storedItems) {
-            setItems(JSON.parse(storedItems));
-        }
-    }, []);
-
-    useEffect(() => {
-        localStorage.setItem('packingList:items', JSON.stringify(items));
-    }, [items]);
-
-    const handleAddItem = (item: ShoppingItem): void => {
-        setItems(prev => [...prev, item]);
-    };
-
-    const handleDeleteItem = (id: number): void => {
-        setItems(prev => prev.filter(item => item.id !== id));
-    };
-
-    const handleToggleItem = (id: number): void => {
-        setItems(prev =>
-            prev.map(item =>
-                item.id === id ? { ...item, packed: !item.packed } : item
-            )
-        );
-    };
-
-    const handleClearList = (): void => {
-        setItems([]);
-    };
-
-    const value: SharedStateContextProps = {
-        items,
-        addItem: handleAddItem,
-        deleteItem: handleDeleteItem,
-        toggleItem: handleToggleItem,
-        clearItems: handleClearList,
-    };
-
-    return (
-        <SharedStateContext.Provider value={value}>
-            {children}
-        </SharedStateContext.Provider>
-    );
-}
-
-export function useSharedState(): SharedStateContextProps {
-    const context = useContext(SharedStateContext);
-    if (!context) {
-        throw new Error('useSharedState must be used within a SharedStateProvider');
-    }
-    return context;
-}*/
 'use client';
 
 import React, { createContext, useContext, useEffect, useState } from 'react';
@@ -116,7 +52,6 @@ export function SharedStateProvider({ children }: { children: React.ReactNode })
 
             if (error) throw error;
 
-            // Transform the data to match your frontend model
             const transformedItems: ShoppingItem[] = (data || []).map(item => ({
                 id: item.id,
                 description: item.description,
@@ -125,7 +60,7 @@ export function SharedStateProvider({ children }: { children: React.ReactNode })
                 unit: item.unit,
                 priority: item.priority,
                 store: item.store,
-                estimatedPrice: item.estimated_price, // Transform snake_case to camelCase
+                estimatedPrice: item.estimated_price,
                 notes: item.notes,
                 packed: item.packed
             }));
@@ -138,7 +73,6 @@ export function SharedStateProvider({ children }: { children: React.ReactNode })
 
     const handleAddItem = async (item: Omit<ShoppingItem, 'id'>) => {
         try {
-            // Transform the data to match database column names
             const transformedItem = {
                 user_id: user?.id,
                 description: item.description,
@@ -147,7 +81,7 @@ export function SharedStateProvider({ children }: { children: React.ReactNode })
                 unit: item.unit,
                 priority: item.priority,
                 store: item.store,
-                estimated_price: item.estimatedPrice, // Transform camelCase to snake_case
+                estimated_price: item.estimatedPrice,
                 notes: item.notes,
                 packed: item.packed
             };
@@ -160,7 +94,6 @@ export function SharedStateProvider({ children }: { children: React.ReactNode })
 
             if (error) throw error;
 
-            // Transform the data back to match your frontend model
             const newItem: ShoppingItem = {
                 id: data.id,
                 description: data.description,
@@ -169,7 +102,7 @@ export function SharedStateProvider({ children }: { children: React.ReactNode })
                 unit: data.unit,
                 priority: data.priority,
                 store: data.store,
-                estimatedPrice: data.estimated_price, // Transform snake_case back to camelCase
+                estimatedPrice: data.estimated_price,
                 notes: data.notes,
                 packed: data.packed
             };

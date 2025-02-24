@@ -33,10 +33,8 @@ export default function FilterOptions({
                                       }: EnhancedFilterOptionsProps) {
     if (!isVisible) return null;
 
-    // Get unique stores from items
     const stores = ['all', ...Array.from(new Set(items.map(item => item.store).filter(Boolean) as string[]))];
 
-    // Get unique categories from items
     const categories = ['all', ...Array.from(new Set(items.map(item => item.category)))];
 
     return (

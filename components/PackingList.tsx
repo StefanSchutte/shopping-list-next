@@ -26,7 +26,6 @@ export default function PackingList({
         status: 'all'
     });
 
-    // Apply filters first
     const filteredItems = items.filter(item => {
         const priorityMatch = filters.priority === 'all' || item.priority === filters.priority;
         const storeMatch = filters.store === 'all' || item.store === filters.store;
@@ -37,7 +36,6 @@ export default function PackingList({
         return priorityMatch && storeMatch && categoryMatch && statusMatch;
     });
 
-    // Then sort the filtered items
     const sortedItems = [...filteredItems].sort((a, b) => {
         switch (sortBy) {
             case 'description-asc':
@@ -107,7 +105,7 @@ export default function PackingList({
                 )}
             </div>
 
-            {/* Enhanced Filter Options */}
+            {/* Filter Options */}
             {items.length > 0 && (
                 <FilterOptions
                     sortBy={sortBy}

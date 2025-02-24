@@ -9,7 +9,6 @@ export default function AddItem() {
     const { addItem } = useSharedState();
     const router = useRouter();
 
-    // Explicitly type the function to match ShoppingItem interface
     const handleAddItemAndNavigate = (item: ShoppingItem) => {
         addItem(item);
         router.push('/');
