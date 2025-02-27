@@ -4,7 +4,6 @@ import { useSharedState } from '@/contexts/SharedStateContext';
 import { ArrowLeft, Brain, Sparkles } from 'lucide-react';
 import Link from 'next/link';
 import type { ShoppingItem } from '@/types/types';
-import { v4 as uuidv4 } from 'uuid';
 
 const AIRecipeAssistant = () => {
     const [query, setQuery] = useState('');
@@ -65,7 +64,7 @@ const AIRecipeAssistant = () => {
 
         aiResponse.ingredients.forEach(ingredient => {
             const newItem: ShoppingItem = {
-                id: uuidv4(),
+                id: Date.now(),
                 description: ingredient.item,
                 quantity: ingredient.quantity,
                 unit: ingredient.unit,

@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import type { ShoppingItem, FormProps } from "@/types/types";
-import { v4 as uuidv4 } from 'uuid';
 
 export default function Form({ onAddItems }: FormProps) {
     const [description, setDescription] = useState("");
@@ -17,7 +16,7 @@ export default function Form({ onAddItems }: FormProps) {
         if (!description || !category) return;
 
         const newItem: ShoppingItem = {
-            id: uuidv4(),
+            id: Date.now(),
             description,
             quantity,
             category,
