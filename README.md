@@ -1,6 +1,6 @@
 # Shopping List App
 
-A modern, full-stack shopping list application built with Next.js, Supabase, and Tailwind CSS. The app features user authentication, real-time updates, and a clean, intuitive interface for managing shopping lists.
+A modern, full-stack shopping list application built with Next.js, Supabase, and Tailwind CSS. The app features user authentication, real-time updates, AI-powered recipe suggestions, and a clean, intuitive interface for managing shopping lists.
 
 Deployed site: [https://shopping-list-next-woad.vercel.app/](https://shopping-list-next-woad.vercel.app/)
 
@@ -9,6 +9,8 @@ Deployed site: [https://shopping-list-next-woad.vercel.app/](https://shopping-li
 - 🔐 User Authentication (Email and Google Sign-in)
 - 📝 Create, Read, Update, and Delete shopping items
 - 🔄 Real-time updates
+- 🧠 AI-powered recipe suggestions
+- 🛒 Automatic addition of recipe ingredients to shopping list
 - 📱 Responsive design
 - 🔍 Advanced filtering and sorting options
 - ✅ Item status tracking (packed/unpacked)
@@ -19,6 +21,7 @@ Deployed site: [https://shopping-list-next-woad.vercel.app/](https://shopping-li
 - **Backend**: Supabase (PostgreSQL)
 - **Styling**: Tailwind CSS
 - **Authentication**: Supabase Auth
+- **AI Integration**: OpenAI GPT-3.5 Turbo
 - **Icons**: Lucide React
 - **Deployment**: Vercel
 
@@ -29,6 +32,7 @@ Deployed site: [https://shopping-list-next-woad.vercel.app/](https://shopping-li
 - Node.js (version 18 or higher)
 - npm/yarn
 - Supabase account
+- OpenAI API key
 - Google Cloud Console project (for Google Sign-in)
 
 ### Installation
@@ -48,6 +52,7 @@ npm install
 ```env
 NEXT_PUBLIC_SUPABASE_URL=your-supabase-project-url
 NEXT_PUBLIC_SUPABASE_ANON_KEY=your-supabase-anon-key
+OPENAI_API_KEY=your-openai-api-key
 ```
 
 4. Set up your Supabase database by running the following SQL commands:
@@ -57,7 +62,7 @@ create table public.shopping_items (
   id bigint primary key generated always as identity,
   user_id uuid references auth.users(id),
   description text not null,
-  quantity integer not null,
+  quantity numeric not null,
   category text not null,
   unit text,
   priority text,
@@ -101,6 +106,7 @@ The app will be available at `http://localhost:3000`.
 3. Add environment variables in Vercel project settings:
     - `NEXT_PUBLIC_SUPABASE_URL`
     - `NEXT_PUBLIC_SUPABASE_ANON_KEY`
+    - `OPENAI_API_KEY`
 4. Deploy
 
 ## Project Structure
@@ -109,6 +115,9 @@ The app will be available at `http://localhost:3000`.
 ├── app/                    # Next.js app directory
 ├── components/            # React components
 ├── contexts/             # React contexts
+├── pages/                 # Pages (including recipe page)
+│   ├── api/               # API routes
+│   │   └── generate-recipe/  # OpenAI recipe generation endpoint
 ├── lib/                  # Utility functions and configurations
 ├── public/              # Static assets
 └── types/               # TypeScript type definitions
@@ -133,6 +142,16 @@ The app will be available at `http://localhost:3000`.
 - Search functionality
 - Active filters display
 
+### AI Recipe Assistant
+
+- Generate complete recipes based on user queries
+- Automatically add all recipe ingredients to shopping list
+- Provides structured recipe information including:
+  - Ingredient quantities and units
+  - Step-by-step cooking instructions
+  - Chef's tips and suggestions
+- Categorizes ingredients for easier shopping
+
 ## Contributing
 
 1. Fork the repository
@@ -147,4 +166,5 @@ The app will be available at `http://localhost:3000`.
 - [Supabase Documentation](https://supabase.com/docs)
 - [Tailwind CSS Documentation](https://tailwindcss.com/docs)
 - [Lucide Icons](https://lucide.dev)
+- [OpenAI API Documentation](https://platform.openai.com/docs/overview)
 
